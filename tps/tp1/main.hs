@@ -1,22 +1,25 @@
 cantidadEmpleados :: String -> Int
 cantidadEmpleados empresa
   | empresa == "Acme" = 10
-  | ultimaLetraMenorQuePrimera empresa = length empresa - 2
-  | esCapicua empresa && cantidadLetrasPar empresa = (length empresa - 2) * 2
-  | letrasDivisiblesPor3y7 empresa = 3
+  | esUltimaLetraMenorQuePrimera empresa = cantidadLetrasIntermedias empresa
+  | esCapicua empresa && esCantidadLetrasPar empresa = cantidadLetrasIntermedias empresa * 2
+  | esCadenaDivisiblesPor3y7 empresa = 3
   | otherwise = 0
 
-ultimaLetraMenorQuePrimera :: String -> Bool
-ultimaLetraMenorQuePrimera cadena = head cadena > last cadena
+esUltimaLetraMenorQuePrimera :: String -> Bool
+esUltimaLetraMenorQuePrimera cadena = head cadena > last cadena
 
 esCapicua :: String -> Bool
 esCapicua cadena = cadena == reverse cadena
 
-cantidadLetrasPar :: String -> Bool
-cantidadLetrasPar cadena = even (length cadena)
+esCantidadLetrasPar :: String -> Bool
+esCantidadLetrasPar cadena = even (length cadena)
 
-letrasDivisiblesPor3y7 :: String -> Bool
-letrasDivisiblesPor3y7 cadena = letrasDivisibles cadena 3 || letrasDivisibles cadena 7
+esCadenaDivisiblesPor3y7 :: String -> Bool
+esCadenaDivisiblesPor3y7 cadena = cadenaDivisible cadena 3 || cadenaDivisible cadena 7
 
-letrasDivisibles :: String -> Int -> Bool
-letrasDivisibles cadena div = mod (length cadena) div == 0 
+cadenaDivisible :: String -> Int -> Bool
+cadenaDivisible cadena div = mod (length cadena) div == 0 
+
+cantidadLetrasIntermedias :: String -> Int
+cantidadLetrasIntermedias cadena = length cadena - 2
