@@ -19,4 +19,4 @@ costoTransporte altura
     | pesoPino altura < 500 && sirvePino altura = 5000
     | pesoPino altura >= 500 && pesoPino altura < 800 && sirvePino altura = 10 * pesoPino altura
     | pesoPino altura >= 800 && sirvePino altura = (10 * pesoPino altura) + altura
-    | otherwise = 0 -- Iria una excepcion
+    | otherwise = 0 -- Iria una excepcion, lo vemos despues
