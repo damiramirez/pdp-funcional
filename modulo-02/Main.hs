@@ -1,66 +1,88 @@
--- g . f -> Primero se aplica f y dsp g
--- imagen f == dominio g
+-- Listas
+personas :: [Integer]
+personas = [1, 2, 3, 4]
 
-cuadruple :: Integer -> Integer
--- cuadruple numero = (doble . doble) numero
--- cuadruple = (doble . doble)
--- Esto se debe a la simplificacion `eta-conversion`
-cuadruple = doble . doble
+-- La cabeza es un elemento y la cola siempre es una lista
+-- (1:[2, 3]) = (1:(2:[3])) = (1:(2:(3:[])))
 
-doble :: Integer -> Integer
-doble numero = numero * 2
+-- Tuplas
+tupla :: (Integer, [Integer], String)
+tupla = (1, [2], "ultraviolento")
 
--- Ej: longitud de nombre es par
+-- Jovits
+type Nombre = String
+type Altura = Int
+type Jovit = (Nombre, Altura)
+type Reputacion = Int
+type Fuerza = Int
 
-nombrePar :: String -> Bool
--- nombrePar nombre = even (length nombre)
--- nombrePar nombre = (even . length) nombre
--- nombrePar = (even . length)
-nombrePar = even . length
--- imagen length = Integer -> dominio even = Integer -> Cumple
+bilbo :: Jovit
+bilbo = ("Bilbo", 125)
 
--- Ej: persona mayor de edad
--- type Persona = (String, Integer)
-type Persona = (String, Integer, String)
-damian :: Persona
-damian = ("Damian", 24, "Medrano 951 CABA")
+rosita :: Jovit
+rosita = ("Rosita Coto", 115)
 
--- snd me devuelve el segundo valor de la tupla
-edad :: Persona -> Integer
--- edad = snd
--- Esta fundion utiliza pattern matching y me devuelve la edad de la tupla de 3 elementos
-edad (_, e, _) = e
+merryl :: Jovit
+merryl = ("Meriadoc Dropdigamo", 131)
 
-mayorEdad :: Integer -> Bool
-mayorEdad edad = edad >= 18
+pippin :: Jovit
+pippin = ("Peregrin Take", 131)
 
-esMayorEdad :: Persona -> Bool
-esMayorEdad = mayorEdad . edad
+yenny :: Jovit
+yenny = ("Yennisifez Lorne", 75)
 
--- Composicion de mas de dos funciones
--- Ej: saber si una persona no es mayor de edad
-esMenorEdad = not . mayorEdad . edad
+ary :: Jovit
+ary = ("Ariel Airimedez", 103)
 
--- Aplicacion parcial
-siguiente :: Integer -> Integer
--- siguiente numero = numero + 1
--- Pero también podemos aprovechar la suma, que está definida como:
--- (+) :: Numero -> Numero -> Numero
--- Entonces la expresión (1 +) define una nueva función:
--- (1 +) :: Numero -> Numero
-siguiente = (1 +)
+-- nombre :: Jovit -> Nombre
+-- nombre jovit = fst jovit
+-- altura :: Jovit -> Altura
+-- altura jovit = snd jovit
 
--- Composicion + aplicacion parcial
--- Ej: compienza con p
+reputacion :: Jovit -> Reputacion
+reputacion (nombre, altura) = length nombre * altura
 
--- comienzaConP :: String -> Bool
--- comienzaConP nombre = head nombre == 'p'
+diferenciaAltura :: Jovit -> Jovit -> Altura
+diferenciaAltura (_, altura1) (_, altura2) =  abs (altura1 - altura2)
 
-esP :: Char -> Bool
-esP = ('p' == )
--- No hace falta que la escriba, puedo usar (('p' ==) . head) "palabras"
+-- Las proximas clases vamos a ver como reducir la expresion
+type Censo = [Jovit]
 
--- Ej: costo estacionamineto
-costoEstacionamiento :: Integer -> Integer
--- costoEstacionamiento horas = ((* 50) . max 2) horas
-costoEstacionamiento = (* 50) . max 2
+amanecioConElCenso :: Censo -> Jovit
+amanecioConElCenso censo = head censo
+
+seCansoDeEsperar :: Censo -> Jovit
+seCansoDeEsperar censo = last censo
+
+participacion :: Censo -> Int
+participacion censo = length censo
+
+elTopeTres :: Censo -> [Jovit]
+elTopeTres censo = take 3 censo
+
+elResto :: Censo -> [Jovit]
+elResto censo = drop 3 censo
+
+-- Data -> Defino nuevos tipos de datos
+-- Ya viene con gets con nombres de los atributos
+data Hobit = UnHobit {
+    nombre :: Nombre,
+    altura :: Altura,
+    fuerza :: Fuerza,
+    esDeLaComarca :: Bool
+} deriving Show
+
+vilvo :: Hobit
+vilvo = UnHobit "Vilvo" 125 5 True
+
+violeta :: Hobit
+violeta = UnHobit {nombre = "Violeta", altura = 115, fuerza = 5, esDeLaComarca = False}
+
+-- Modificar data -> Simulo un cambio de estado ya que en Haskell todo es inmutable
+perderHabla :: Hobit -> Hobit
+-- perderHabla hobit = UnHobit{nombre = drop 4 (nombre hobit), altura = altura hobit ...}
+-- De esta forma voy a crear un nuevo Hobit pero solo cambia lo que esta dentro del {}
+perderHabla hobit = hobit{nombre = drop 4 (nombre hobit)}
+
+ininputable :: Hobit -> Hobit
+ininputable hobit = UnHobit{nombre = nombre hobit ++ " sos inimputable", altura = altura hobit + 10, fuerza = fuerza hobit `div` 2, esDeLaComarca = True}
