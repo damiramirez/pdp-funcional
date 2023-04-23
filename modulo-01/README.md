@@ -9,9 +9,13 @@ Para ser una función, tiene que:
 
 En algoritmos, una función con mismos parámetros no tiene la misma salida, por lo tanto no cumple con los requisitos de función -> Unicidad. Ademas, no siempre devuelve algo, por lo tanto no cumplen con existencia.
 
+## Abstracción
+
+## Declaratividad
+
 ## Expresividad
 
-Que el código sea fácil de entender, ya sea tipando, con buenos nombres de variables, etc.
+Que el código sea fácil de entender, ya sea declarando los tipos de datos, con buenos nombres de variables, etc.
 
 ## Declarativo
 **FALTA INFO**
@@ -40,6 +44,8 @@ Si quiero una función con varios parámetros -> `suma :: Number -> Number -> Nu
 - Function (t1 -> t2) -> not, even, head, >, +, ... -> aplicación, composición, ...
 
 | Funciones son valores! Las operaciones matemáticas son funciones también.
+
+En la consola si uso: `:t` me devuelve el tipo de una expresión o función -> `Integer a => a -> a`. Quiere decir que los valores que sean `a` van a ser tomados como `Integer`
 
 ### Condicional
 
