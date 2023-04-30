@@ -14,7 +14,7 @@ Funciones con tipado dinámico, pueden recibir cualquier tipo de parámetro.
 ## TypeClass
 Es una interfaz, que define un conjunto de operaciones que pueden ser utilizadas con diferentes tipos de datos. Algunos Type que vamos a usar:
 - `Eq`: para la igualdad y desigualdad.
-- `Ord`: para la comparación de orden.
+- `Ord`: para la comparación de orden. - Int, Float, Double, Char y String
 - `Show`: para la conversión de un valor a una cadena.
 
 ## Pattern Matching

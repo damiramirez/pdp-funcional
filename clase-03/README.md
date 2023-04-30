@@ -25,4 +25,4 @@ La función `any` es una función de orden superior en Haskell que toma una func
 
 ### All
 La función `all` toma una función booleana y una lista como argumentos y devuelve True si la función se satisface para todos los elementos de la lista. 
-all :: Foldable t => (a -> Bool) -> t a -> Bool
+`all :: Foldable t => (a -> Bool) -> t a -> Bool`
