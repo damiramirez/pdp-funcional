@@ -34,6 +34,12 @@ grupo = [nobara, yuji, satoru, maki]
 grupo2 :: Equipo
 grupo2 = [nobara, maki]
 
+grupo3 :: Equipo
+grupo3 = [nobara, maki, yuji]
+
+grupo4 :: Equipo
+grupo4 = [satoru, satoru]
+
 equipoPreparado :: Equipo -> Bool
 equipoPreparado hechiceros = tamanioEquipo hechiceros > 3
 
@@ -55,3 +61,41 @@ clanesPrestigiosos = ["Zenin", "Gojo", "Kamo"]
 
 esPrestigioso :: Hechicero -> Bool
 esPrestigioso hechiero = clan hechiero `elem` clanesPrestigiosos
+
+-- Punto 6
+gruposInvencibles :: Equipo -> Bool
+gruposInvencibles grupo = any gradoEspecial grupo
+
+-- Punto 7
+grupoFavorito :: Equipo -> Bool
+grupoFavorito grupo = all gradoEspecial grupo
+
+-- Punto 8
+type Expertos = [Hechicero]
+sonExpertos :: Equipo -> Expertos
+sonExpertos equipo = filter tieneExperiencia equipo
+
+-- Punto 9
+hacerFrente :: Equipo -> Bool
+hacerFrente grupo = gruposInvencibles grupo || equipoPreparado grupo
+
+powerUp :: Equipo -> Equipo
+powerUp grupo = map subirGrado grupo
+
+-- Punto 10
+elMasApto :: Ord a => (Hechicero -> a) -> Hechicero -> Hechicero -> Hechicero
+elMasApto nivel hechicero1 hechicero2 
+    | nivel hechicero1 > nivel hechicero2 = hechicero1
+    | otherwise = hechicero2 
+
+nivelTryhard :: Hechicero -> Int
+nivelTryhard hechicero = 1 `div` (grado hechicero + 1)
+
+nivelBurocratico :: Hechicero -> Int
+nivelBurocratico hechicero = length (clan hechicero)
+
+nivelIntimidante :: Hechicero -> Char
+nivelIntimidante hechicero = maximum (clan hechicero)
+
+nivelSigilo :: Hechicero -> Int
+nivelSigilo hechicero = antiguedad hechicero * 6
