@@ -37,9 +37,6 @@ Decimos que un algoritmo es mas declarativo si se enfoca en describir el resulta
 
 Decimos que una solución A es más expresiva que una solución B si la solución A se entiende más rápido/es más fácil de leer que la solución B. Claramente la idea de expresividad puede verse de forma subjetiva.
 
-## Declarativo
-**FALTA INFO**
-
 ## Haskell
 
 No existen las variables.

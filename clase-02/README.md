@@ -18,7 +18,8 @@ Es una interfaz, que define un conjunto de operaciones que pueden ser utilizadas
 - `Show`: para la conversión de un valor a una cadena.
 
 ## Pattern Matching
-**Ver video**
+Mecanismo para descomponer valores complejos y estructurados en partes más simples y manejar cada parte de manera independiente. Se utiliza principalmente para definir funciones que manejan diferentes casos según la forma o estructura de sus argumentos. Cuando se aplica una función a un valor, Haskell evalúa los patrones en orden y selecciona el primero que coincida con el valor, permitiendo que la función se ejecute en consecuencia. De esta manera podemos tener distintos valores de la imagen para distintos elementos del dominio.
+
 
 ## TypeAlias
 Es un nombre alternativo o alias que se le da a un tipo de datos existente. Se utiliza para darle a un tipo de datos un nombre más significativo y fácil de entender en el contexto de una aplicación en particular.

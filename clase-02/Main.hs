@@ -1,3 +1,16 @@
+-- Pattern Matching
+-- Es importante el orden - evalua de arriba hacia abajo
+
+type Dia = String
+type Hora = Int
+
+horariosCierre :: Dia -> Bool -> Hora
+horariosCierre "domingo" True = 13
+horariosCierre "sabado" False = 21
+-- Si no uso la variable, puedo usar _ (variable anonima)
+horariosCierre _ True = 20 
+horariosCierre dia False = 12 + length dia
+
 -- Listas
 personas :: [Integer]
 personas = [1, 2, 3, 4]
@@ -34,6 +47,7 @@ yenny = ("Yennisifez Lorne", 75)
 ary :: Jovit
 ary = ("Ariel Airimedez", 103)
 
+-- Esto me sirve en tuplas de dos elementos -> fst y snd
 -- nombre :: Jovit -> Nombre
 -- nombre jovit = fst jovit
 -- altura :: Jovit -> Altura
