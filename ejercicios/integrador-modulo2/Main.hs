@@ -38,6 +38,7 @@ hijoDelRigor n (Parcial _ cantidadPreguntas)= cantidadPreguntas > n
 cabuleros :: CriterioEstudio
 cabuleros (Parcial materia _) = odd (length materia)
 
+nico :: Alumno
 nico = Alumno {
   fechaNacimiento = (10, 3, 1998),
   nombre = "Nico",
