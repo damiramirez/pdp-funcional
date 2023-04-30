@@ -1,18 +1,37 @@
--- Cliente
-type Nombre = String
-type Deuda = Float
-type Factura = Float
-type Facturas = [Factura]
+sumaNaTodos :: Int -> [Int] -> [Int]
+sumaNaTodos _ [] = []
+sumaNaTodos n (x:xs) = x + n: sumaNaTodos n xs
 
-data Cliente = UnCliente {
-  nombre :: Nombre,
-  deuda :: Deuda,
-  facturas :: Facturas
-} deriving (Show)
+suma1aTodos :: [Int] -> [Int]
+suma1aTodos [] = []
+suma1aTodos (x:xs) = x + 1 :suma1aTodos xs
 
-clientes = [
-  UnCliente "Biassuto" 6000 [4000, 5000],
-  UnCliente "Colombatti" 15000 [30000],
-  UnCliente "Marabotto" 200 [500000, 140000]
- ]
+suma5aTodos :: [Int] -> [Int]
+suma5aTodos [] = []
+suma5aTodos (x:xs) = x + 5 :suma5aTodos xs
 
+duplicaATodos :: [Int] -> [Int]
+duplicaATodos [] = []
+duplicaATodos (x:xs) = x * 2 :duplicaATodos xs
+
+restaATodos :: [Int] -> [Int]
+restaATodos [] = []
+restaATodos (x:xs) = x - (div x 3) :restaATodos xs
+
+---------------------------------
+
+haceAlgoConTodos :: (Int -> Int) -> [Int] -> [Int]
+haceAlgoConTodos funcion [] = []
+haceAlgoConTodos funcion (x:xs) = funcion x :haceAlgoConTodos funcion xs
+
+suma1 x = x + 1
+
+duplica x = x * 2
+
+resta x = x - (div x 3)
+
+funcionLoca :: Int -> Int
+funcionLoca x = 2 + 3 * x + 2 * x * x
+
+empiezaConD :: String -> Bool
+empiezaConD nombre = head nombre == 'D'
