@@ -1,78 +1,71 @@
-import Distribution.PackageDescription.Parsec (parseGenericPackageDescriptionMaybe)
-
-type Nombre = String
+type HorasEntrenamiento = Int
 type Poder = Int
-type Horas = Int
+type Objetivo = String
 type Fortaleza = Int
 type Presion = Int
-type Objeto = String
 
+poderGolpe :: HorasEntrenamiento -> Poder
+poderGolpe = (* 15)
 
-data Golpe = UnGolpe {
-  nombre :: Nombre,
-  horasEntrenamiento :: Horas
-} deriving (Show)
+fortalezaObjetivo :: Objetivo -> Fortaleza
+fortalezaObjetivo = (* 2) . length
 
-kame :: Golpe
-kame = UnGolpe{nombre = "KameHameHa", horasEntrenamiento = 200}
+presionGolpe :: HorasEntrenamiento -> Objetivo -> Poder
+presionGolpe horasEntrenamiento objetivo = poderGolpe horasEntrenamiento `div` fortalezaObjetivo objetivo
 
-gomu :: Golpe
-gomu = UnGolpe{nombre = "gomu gomu elephant gatling", horasEntrenamiento = 180}
+gomuGomuElephantGatling :: Objetivo -> Presion
+gomuGomuElephantGatling = presionGolpe 180
 
-golpesConsecutivos :: Golpe
-golpesConsecutivos = UnGolpe{nombre = "golpes normales consecutivos", horasEntrenamiento = 240}
+golpesNormalesConsecutivos :: Objetivo -> Presion
+golpesNormalesConsecutivos = presionGolpe 240
 
-poderGolpe :: Golpe -> Poder
-poderGolpe golpe = 15 * horasEntrenamiento golpe
+esDificil :: Objetivo -> Bool
+esDificil = (< 100) . gomuGomuElephantGatling
 
-fortalezaObjeto :: Objeto -> Fortaleza
-fortalezaObjeto objeto = 2 * length objeto
+esAccesible :: Objetivo -> Bool
+esAccesible = between 200 400 . golpesNormalesConsecutivos . focalizar
 
-presionGolpe :: Golpe -> Objeto -> Presion
-presionGolpe golpe objeto = poderGolpe golpe `div` fortalezaObjeto objeto
+between :: Int -> Int -> Int -> Bool
+between menor mayor nro = nro > menor && nro < mayor
 
-esObjetivoDificil :: Objeto -> Bool
-esObjetivoDificil objeto = presionGolpe gomu objeto < 100
+focalizar :: Objetivo -> Objetivo
+focalizar = take 7
 
-esObjetivoAccesible :: Objeto -> Bool
-esObjetivoAccesible objeto = presionGolpe golpesConsecutivos (focalizarObjeto objeto) > 200 && presionGolpe golpesConsecutivos (focalizarObjeto objeto) < 400
+-- type Nombre = String
+-- type Poder = Int
+-- type Horas = Int
+-- type Fortaleza = Int
+-- type Presion = Int
+-- type Objeto = String
 
-focalizarObjeto :: Objeto -> Nombre
-focalizarObjeto objeto = take 7 objeto
-
-
--- data Heroe = UnHeroe {
+-- data Golpe = UnGolpe {
 --   nombre :: Nombre,
 --   horasEntrenamiento :: Horas
 -- } deriving (Show)
 
--- data Golpe = UnGolpe {
---   nombreGolpe :: Nombre,
---   horasNecesarias :: Horas
--- } deriving (Show)
+-- kame :: Golpe
+-- kame = UnGolpe{nombre = "KameHameHa", horasEntrenamiento = 200}
 
--- Tipos de golpes
 -- gomu :: Golpe
--- gomu = UnGolpe{nombreGolpe = "gomu gomu elephant gatling", horasNecesarias = 180}
-
--- gomuHeroe :: Heroe
--- gomuHeroe = UnHeroe{nombre= "gomu gomu elephant gatling", horasEntrenamiento = 180}
+-- gomu = UnGolpe{nombre = "gomu gomu elephant gatling", horasEntrenamiento = 180}
 
 -- golpesConsecutivos :: Golpe
--- golpesConsecutivos = UnGolpe{nombreGolpe = "golpes normales consecutivos", horasNecesarias = 240}
+-- golpesConsecutivos = UnGolpe{nombre = "golpes normales consecutivos", horasEntrenamiento = 240}
 
--- golpesHereo :: Heroe
--- golpesHereo = UnHeroe{nombre = "golpes normales consecutivos", horasEntrenamiento = 240}
-
--- -- Heroe para testear
--- damian :: Heroe
--- damian = UnHeroe{nombre = "Damian", horasEntrenamiento = 200}
-
--- presionGolpe :: Heroe -> Objeto -> Presion
--- presionGolpe heroe objeto = poderGolpe heroe `div` fortalezaObjeto objeto
-
--- poderGolpe :: Heroe -> Poder
--- poderGolpe heroe = 15 * horasEntrenamiento heroe
+-- poderGolpe :: Golpe -> Poder
+-- poderGolpe golpe = 15 * horasEntrenamiento golpe
 
 -- fortalezaObjeto :: Objeto -> Fortaleza
 -- fortalezaObjeto objeto = 2 * length objeto
+
+-- presionGolpe :: Golpe -> Objeto -> Presion
+-- presionGolpe golpe objeto = poderGolpe golpe `div` fortalezaObjeto objeto
+
+-- esObjetivoDificil :: Objeto -> Bool
+-- esObjetivoDificil objeto = presionGolpe gomu objeto < 100
+
+-- esObjetivoAccesible :: Objeto -> Bool
+-- esObjetivoAccesible objeto = presionGolpe golpesConsecutivos (focalizarObjeto objeto) > 200 && presionGolpe golpesConsecutivos (focalizarObjeto objeto) < 400
+
+-- focalizarObjeto :: Objeto -> Nombre
+-- focalizarObjeto = take 7
