@@ -158,6 +158,36 @@ Haskell como otros lenguajes funcionales, trabajan con el concepto de evaluació
 - Como corolario, puedo trabajar con estructuras potencialmente infinitas (como las listas), mientras asegure que el algoritmo converge
 Si una expresión puede andar, con evaluación diferida seguro que anda. Si se rompe, es porque necesité algo que se rompía. 
 
+## Fold
+Fold es una de las funciones típicas de orden superior sobre listas, algunas de las más esotéricas. Los folds constituyen una herramienta muy poderosa porque nos propone formas generales de resolver problemas de recorrido de estructuras (por ejemplo, listas) en las que se requiere de un acumulador. 
+
+### Foldl y Foldr
+El fold más simple que implementa justamente esta idea es `foldl`, el cual combina los elementos de una lista dada, usando una función dada:
+
+Fold va a recibir la función reducción, luego va la semilla (valor acumulado) y por ultimo recibe la lista que tiene que foldear. La función se va a aplicar a la semilla contra los elementos de la lista, esta semilla se va a ir actualizando según los resultados al aplicar la función. La semilla puede ser de distinto valor que los elementos de la lista, pero la función reducción tiene que devolver un valor que sea del mismo tipo de la semilla.
+
+````Haskell
+foldl :: (b -> a -> b) -> b -> [a] -> b
+foldl funcion semilla (x:xs) =  foldl funcion (funcion semilla x) xs
+foldl _ semilla [] = semilla
+```
+
+Estas funciones son asociativas:
+- ¿Como asocia foldl, entonces? De izquierda a derecha (de allí la L de left de foldl) 
+- ¿Y si queremos asociar de derecha a izquierda? Allí tenemos foldr, con R de right. 
+
+El foldr hace lo mismo pero opera la semilla como si fuera el ultimo elemento.
+
+*La primera moraleja es que usar foldr y foldl no será indistinto cuando la asociatividad importe.*
+
+Otra manera de pensarlo es intercalar entre cada elemento de una lista, la función de reducción.
+
+```
+[ 4 ,  5 , 8 ]
+  4 * 5 * 8 
+    160
+```
+
 ## Resumen
 La recursividad en Haskell se relaciona con la estructura de iteración de los paradigmas imperativos pero también es cercana a la definición por inducción que conocemos de la matemática. Todo algoritmo recursivo necesita un caso base para cortar la recursividad y un caso recursivo.
 

@@ -20,3 +20,21 @@ noHayDivisores minimo maximo n
 
 esDivisorDe :: Int -> Int -> Bool
 esDivisorDe unNumero otroNumero = mod otroNumero unNumero == 0
+
+-- -- Reduccion -> Fold -> Foldl y Foldr
+-- type Calorias = Float
+
+-- data Hombre = UnHombre String Float deriving Show
+-- data Comida = UnaComida Calorias deriving Show
+
+-- rosquilla1 :: Comida
+-- rosquilla1 = UnaComida 300
+-- rosquilla2 :: Comida
+-- rosquilla2 = UnaComida 200
+-- rosquilla3 :: Comida
+-- rosquilla3 = UnaComida 150
+
+-- homero :: Hombre
+-- homero = UnHombre "Homero Simpson" 120
+
+-- comer 
